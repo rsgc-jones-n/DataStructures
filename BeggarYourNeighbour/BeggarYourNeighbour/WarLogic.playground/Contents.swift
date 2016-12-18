@@ -31,6 +31,12 @@ enum Suit : String {
 // Play with the enumeration a bit to see what it gives us
 Suit.hearts.hashValue
 Suit.hearts.rawValue
+Suit.diamonds.hashValue
+Suit.diamonds.rawValue
+Suit.spades.hashValue
+Suit.spades.rawValue
+Suit.clubs.hashValue
+Suit.clubs.rawValue
 
 // Create a new datatype to represent a playing card
 struct Card {
@@ -78,9 +84,70 @@ while deck.count > 26 {
     
 }
 
+while deck.count > 0 {
+    
+    // Generate a random number between 0 and the count of cards still left in the deck
+    var position = Int(arc4random_uniform(UInt32(deck.count)))
+    
+    // Copy the card in this position to the player's hand
+    computerHand.append(deck[position])
+    
+    // Remove the card from the deck for this position
+    deck.remove(at: position)
+    
+}
+
+
 // Iterate over the player's hand
 print("=====================================")
 print("All cards in the player's hand are...")
 for (value, card) in playerHand.enumerated() {
     print("Card \(value) in player's hand is a suit of \(Suit.glyph(forHashValue: card.suit)) and value is \(card.value)")
 }
+
+// Iterate over the compter's hand
+print("=====================================")
+print("All cards in the computer's hand are...")
+for (value, card) in computerHand.enumerated() {
+    print("Card \(value) in computers's hand is a suit of \(Suit.glyph(forHashValue: card.suit)) and value is \(card.value)")
+}
+
+// Let's start the game
+
+func tieBreak(){
+    
+}
+
+// Only play if the game has not been won/lost
+while playerHand.count > 0 && playerHand.count < 52 {
+    
+    for card in ????????????? {
+    
+        if playerHand[card].value > computerHand[card].value {
+            
+            print("Player wins!")
+            playerHand.append(computerHand[card])
+            computerHand.removeLast()
+        
+        }
+        
+        if playerHand[card].value < computerHand[card].value {
+        
+            print("Computer wins!")
+            computerHand.append(playerHand[card])
+            playerHand.removeLast()
+            
+        }
+        
+        if playerHand[card].value == computerHand[card].value {
+            
+            print("It's a tie!")
+            tieBreak()
+            
+        }
+        
+    }
+
+}
+
+
